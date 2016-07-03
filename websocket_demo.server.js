@@ -1,5 +1,3 @@
-// Thanks to Kyle Simpson @getify for the excellent tutorial that got me started.
-
 var port = process.env.PORT || 8000;
 
 // Set modules and server
@@ -10,19 +8,16 @@ const ASQ = require('asynquence');
 const node_static = require('node-static');
 const static_files = new node_static.Server(__dirname);
 const io = require('socket.io').listen(http_serv);
-// const exchange = require('./lib/exchange');
-// console.log(exchange.amountToOther());
-
-const request = require('request');
+const exchange = require('./lib/exchange.js');
 
 // Handle http requests
 
 function handleHTTP(req, res) {
-  if (req.method === "GET") {
+  if (req.method === 'GET') {
     // Handle html that has a numeric begining
     if (req.url === '/') {
-      req.addListener("end", function(){
-        req.url = "home.html"
+      req.addListener('end', function(){
+        req.url = 'home.html'
         static_files.serve(req, res);
       });
       req.resume();
@@ -34,13 +29,22 @@ function handleHTTP(req, res) {
       static_files.serve(req, res);
     } else {
       res.writeHead(403);
-      res.end("Page not Found!");
+      res.end('Page not Found!');
     }
   } else {
     res.writeHead(403);
-    res.end("Page not found!");
+    res.end('Page not found!');
   }
 }
+// NEW ROUTES Setup
+
+// Login page -> User login -> POST : redirect -> User begins chat
+// Login page -> User signup -> POST : redirect -> User begins chat
+// Login page -> User requests password POST -> Email sent
+// Password reset page -> POST : redirect -> User login
+// Login page -> User login -> POST : redirect -> FAIL
+
+
 
 // Setup socket connection
 
@@ -72,28 +76,15 @@ function handleIO(socket) {
   // Send exchange rate at 10 second interval to all clients
 
   var intv = setInterval(function () {
-    return amountToOther().then(r => {
+    return exchange.amountToOther().then(r => {
         console.log(r);
-        socket.emit('random_number', r);
+        socket.emit('exchangeRate', r);
       });
-  }, 5000);
+  }, 10000);
 }
 
 // Set connection
 
 io.on('connection', handleIO);
 
-// Helper functions
-
-var baseRate = 'AUD';
-
-const amountToOther = () => {
-  return new Promise((resolve, reject) => {
-    return request.get(`http://api.fixer.io/latest?base=${baseRate}`, (err, res, body) => {
-      if (err) return reject(err);
-      const data = JSON.parse(body);
-      const result = data.rates['USD'];
-      return resolve(result);
-    });
-  });
-};
+// Thanks to Kyle Simpson @getify for the excellent tutorial that got me started.
