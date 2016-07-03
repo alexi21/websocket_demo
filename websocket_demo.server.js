@@ -11,6 +11,7 @@ const node_static = require('node-static');
 const static_files = new node_static.Server(__dirname);
 const io = require('socket.io').listen(http_serv);
 // const exchange = require('./lib/exchange');
+// console.log(exchange.amountToOther());
 
 const request = require('request');
 
