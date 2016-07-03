@@ -1,5 +1,5 @@
 
-var port = 8000;
+var port = 80;
 
 // Set modules and server
 
@@ -29,11 +29,11 @@ function handleHTTP(req, res) {
       static_files.serve(req, res);
     } else {
       res.writeHead(403);
-      res.end("Get outta here!");
+      res.end("Page not Found!");
     }
   } else {
     res.writeHead(403);
-    res.end("Get outta here!");
+    res.end("Page not found!");
   }
 }
 
