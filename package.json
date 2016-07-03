@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/alexi21/websocket_demo/issues"
   },
-  "homepage": "https://github.com/alexi21/websocket_demo#readme"
+  "homepage": "https://github.com/alexi21/websocket_demo#readme",
+  "dependencies": {
+    "asynquence": "^0.9.0",
+    "node-static": "^0.7.7",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
+  }
 }
