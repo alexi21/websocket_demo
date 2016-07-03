@@ -1,3 +1,4 @@
+// Thanks to Kyle Simpson @getify for the excellent tutorial that got me started.
 
 var port = process.env.PORT || 8000;
 
@@ -43,13 +44,11 @@ function handleIO(socket) {
 
   // Handle disconnection otherwise log connected
 
-  function disconnect() {
-    console.log('client disconnected');
-  }
-
   console.log('client connected');
 
-  socket.on('disconnect', disconnect);
+  socket.on('disconnect', function() {
+    console.log('client disconnected');
+  });
 
   // Receive and send messages
 
