@@ -10,6 +10,9 @@ const ASQ = require('asynquence');
 const node_static = require('node-static');
 const static_files = new node_static.Server(__dirname);
 const io = require('socket.io').listen(http_serv);
+// const exchange = require('./lib/exchange');
+
+const request = require('request');
 
 // Handle http requests
 
@@ -65,13 +68,31 @@ function handleIO(socket) {
     });
   });
 
-  // Send random numbers at one second interval to all clients
+  // Send exchange rate at 10 second interval to all clients
 
   var intv = setInterval(function () {
-    socket.emit('random_number', Math.random());
-  }, 1000)
+    return amountToOther().then(r => {
+        console.log(r);
+        socket.emit('random_number', r);
+      });
+  }, 5000);
 }
 
 // Set connection
 
 io.on('connection', handleIO);
+
+// Helper functions
+
+var baseRate = 'AUD';
+
+const amountToOther = () => {
+  return new Promise((resolve, reject) => {
+    return request.get(`http://api.fixer.io/latest?base=${baseRate}`, (err, res, body) => {
+      if (err) return reject(err);
+      const data = JSON.parse(body);
+      const result = data.rates['USD'];
+      return resolve(result);
+    });
+  });
+};

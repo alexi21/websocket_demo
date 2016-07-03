@@ -27,8 +27,13 @@ input {
   font-size: 0.8em;
 }
 
+.header {
+  letter-spacing: 2px;
+  font-size: 0.8em;
+}
+
 #submitmessage {
-  
+
 }
 
 #container {
