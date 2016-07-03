@@ -4,6 +4,8 @@
   "description": "A websockets demo",
   "main": "websocket_demo.server.js",
   "scripts": {
+    "watch": "nodemon websocket_demo.server.js",
+    "start": "node websocket_demo.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

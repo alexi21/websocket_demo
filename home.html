@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Websocket Demo</title>
+<meta charset="iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="websocket_demo.css">
+</head>
+<body>
+	<header>
+		<h1>websocket demo</h1>
+		<p id="random_number"></p>
+	</header>
+
+	<main>
+		<div id="container">
+			<p>
+			<input id="message"> <input type="button" id="submitmessage" value="send">
+			</p>
+			<div id="me">
+				<h2>Me</h2>
+				<p id="broadcast"></p>
+			</div>
+			<div id="you">
+				<h2>You</h2>
+				<p id="receive"></p>
+			</div>
+		</div>
+	</main>
+
+	<div id="spy_marker"></div>
+
+<script src="/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/websocket_demo.js"></script>
+</body>
+</html>
