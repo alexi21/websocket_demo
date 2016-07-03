@@ -1,5 +1,5 @@
 
-var port = 80;
+var port = process.env.PORT || 8000;
 
 // Set modules and server
 
