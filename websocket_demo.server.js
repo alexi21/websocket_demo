@@ -55,7 +55,7 @@ function handleIO(socket) {
 
   socket.on('msg', function(broadcast) {
     socket.broadcast.emit('broadcast', broadcast);
-  })
+  });
 
   // Receive and send mouse position
 
