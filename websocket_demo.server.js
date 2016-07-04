@@ -4,7 +4,6 @@ var port = process.env.PORT || 8000;
 
 const http = require('http');
 const http_serv = http.createServer(handleHTTP).listen(port);
-const ASQ = require('asynquence');
 const node_static = require('node-static');
 const static_files = new node_static.Server(__dirname);
 const io = require('socket.io').listen(http_serv);
@@ -36,15 +35,6 @@ function handleHTTP(req, res) {
     res.end('Page not found!');
   }
 }
-// NEW ROUTES Setup
-
-// Login page -> User login -> POST : redirect -> User begins chat
-// Login page -> User signup -> POST : redirect -> User begins chat
-// Login page -> User requests password POST -> Email sent
-// Password reset page -> POST : redirect -> User login
-// Login page -> User login -> POST : redirect -> FAIL
-
-
 
 // Setup socket connection
 
