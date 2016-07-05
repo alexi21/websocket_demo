@@ -63,14 +63,18 @@ function handleIO(socket) {
     });
   });
 
+  var randomNumber = setInterval(function() {
+    socket.emit('exchangeRate', Math.floor(Math.random() * 100));
+  }, 1000)
+
   // Send exchange rate at 10 second interval to all clients
 
-  var intv = setInterval(function () {
-    return exchange.amountToOther().then(r => {
-        console.log(r);
-        socket.emit('exchangeRate', r);
-      });
-  }, 10000);
+  // var intv = setInterval(function () {
+  //   return exchange.amountToOther().then(r => {
+  //       console.log(r);
+  //       socket.emit('exchangeRate', r);
+  //     });
+  // }, 10000);
 }
 
 // Set connection
