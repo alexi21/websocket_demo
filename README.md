@@ -32,22 +32,28 @@ In order to recieve and run commands within the server we listen on each socket 
 
 Which is as follows:
 
-```function disconnect() {
-    console.log('client disconnected');
-  }```
+```
+function disconnect() {
+  console.log('client disconnected');
+}
+```
   
 More interesting functions can be run to receive data through the web socket, and then parse that data according to the logic of the program. As an example the following instance of a socket connection listens for the ```msg``` command and then broadcasts that command to all connected sockets with the command ```broadcast``` and the attached data.
 
-```socket.on('msg', function(broadcast) {
+```
+socket.on('msg', function(broadcast) {
     socket.broadcast.emit('broadcast', broadcast);
-  });```
+});
+```
   
 On the CLIENT side a socket is also created with the ```io.connect``` command and attached to a variable.
 
-```var socket = io.connect("/",{
+```
+var socket = io.connect("/",{
   "connect timeout": 3000,
   "reconnect": false
-});```
+});
+```
 
 The broadcast command is received, as it is on the server, however on the client we want to run a different function and parse the received data in a different manner.
 
@@ -57,9 +63,11 @@ First we receive the command and data.
 
 Then we run the ```receive``` function to use that received data in accordance with our logic.
 
-```function receive(msg) {
+```
+function receive(msg) {
   document.getElementById("receive").innerHTML = document.getElementById("receive").innerHTML + msg + "<br>";
-}```
+}
+```
 
 Here we are simply appending that data to the element on the html page with the ```id="receive"```.
 
